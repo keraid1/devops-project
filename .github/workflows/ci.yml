@@ -37,5 +37,11 @@ jobs:
       - name: Simulate Deployment (Run container)
         run: docker run -d -p 8080:80 --name deployed-app ghcr.io/${{ github.repository }}:latest
 
+      - name: Debug container status
+        run: |
+          sleep 3
+          docker ps -a
+          docker logs deployed-app
+
       - name: Check Deployment is alive
-        run: curl -f http://localhost:8080 || exit 1
+        run: curl -4 -f http://localhost:8080 || exit 1
