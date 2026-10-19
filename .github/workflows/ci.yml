@@ -31,3 +31,11 @@ jobs:
       - name: Push Docker image
         run: docker push ghcr.io/${{ github.repository }}:latest
 
+      - name: Simulate Deployment (Pull imgae)
+        run: docker pull ghcr.io/${{ github.repository }}:latest
+
+      - name: Simulate Deployment (Run container)
+        run: docker run -d -p 8080:80 --name deployed-app ghcr.io/${{ github.repository }}:latest
+
+      - name: Check Deployment is alive
+        run: curl -f http://localhost:8080 || exit 1
