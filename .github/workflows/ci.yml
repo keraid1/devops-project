@@ -10,3 +10,9 @@ jobs:
     steps:
       - name: Say Hello
         run: echo "Hello from my CI pipeline!"
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t my-site:ci .
