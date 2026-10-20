@@ -1,5 +1,15 @@
 services:
-  web:
+  site-one:
     build: .
     ports:
-      - "8080:80"
+      - "8081:80"
+    volumes:
+      - ./logs:/var/log/nginx
+
+  site-two:
+    build: .
+    ports:
+      - "8082:80"
+    volumes:
+      - ./logs:/var/log/nginx
+      - ./html2:/usr/share/nginx/html
